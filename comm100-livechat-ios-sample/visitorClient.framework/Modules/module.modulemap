@@ -1,0 +1,11 @@
+framework module visitorClient {
+  umbrella header "visitorClient.h"
+
+  export *
+  module * { export * }
+}
+
+module visitorClient.Swift {
+    header "visitorClient-Swift.h"
+    requires objc
+}
