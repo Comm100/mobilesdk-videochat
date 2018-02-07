@@ -6,13 +6,11 @@
     android:gravity="center"
     tools:context=".MainActivity">
     <TableRow
-        android:id="@+id/tableRow1"
         android:gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -31,12 +29,10 @@
             />
     </TableRow>
     <TableRow
-        android:id="@+id/tableRow11"
         android:layout_width="wrap_content"
         android:gravity="right"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/textView11"
             android:layout_width="50px"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -56,13 +52,11 @@
             />
     </TableRow>
     <TableRow
-        android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
         android:gravity="right"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView22"
             android:layout_width="50px"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -77,17 +71,15 @@
             android:gravity="left"
             android:minWidth="300px"
             android:textSize="30px"
-            android:text="https://55c9a4c2.ngrok.io"
+            android:text="https://d8facf4a.ngrok.io"
             />
     </TableRow>
 
     <TableRow
-        android:id="@+id/tableRow33"
         android:layout_width="wrap_content"
         android:gravity="right"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -95,7 +87,6 @@
             android:textSize="20px"
             />
         <TextView
-            android:id="@+id/textView232"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
@@ -106,12 +97,10 @@
     </TableRow>
 
     <TableRow
-        android:id="@+id/tableRow35"
         android:layout_width="wrap_content"
         android:gravity="right"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -119,7 +108,6 @@
             android:textSize="20px"
             />
         <TextView
-            android:id="@+id/textView215"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
@@ -130,7 +118,6 @@
     </TableRow>
 
     <TableRow
-        android:id="@+id/tableRow3"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
 public class MainActivity extends AppCompatActivity {
     private  Button mChatButton=null;
     private EditText mSiteId=null;
@@ -36,12 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent=new Intent(MainActivity.this,VisitorXWalkActivity.class);
 
-
                 intent.putExtra("site_id",siteId);
                 intent.putExtra("plan_id",planId);
                 intent.putExtra("chat_server",chatServer);
-                intent.putExtra("debug",true);//是否调试
+                intent.putExtra("debug",true);//是否调试  to debug
                 startActivity(intent);
+
+
             }
         });
 

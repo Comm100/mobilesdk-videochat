@@ -6,15 +6,16 @@ package xwalkviewchatwindow.com100.com.comm100_livechat_android_xwalk_sample;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.app.Activity;
-import android.webkit.PermissionRequest;
+import android.view.KeyEvent;
 import android.webkit.ValueCallback;
 import  android.util.Log;
 
-
 import org.xwalk.core.ClientCertRequest;
 import org.xwalk.core.XWalkHttpAuthHandler;
+import org.xwalk.core.XWalkSettings;
 import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
 import org.xwalk.core.XWalkPreferences;
@@ -22,7 +23,7 @@ import  org.xwalk.core.XWalkResourceClient;
 import  org.xwalk.core.XWalkJavascriptResult;
 import org.xwalk.core.XWalkWebResourceRequest;
 import org.xwalk.core.XWalkWebResourceResponse;
-
+import org.xwalk.core.JavascriptInterface;
 import  android.net.http.SslError;
 
 @SuppressWarnings("deprecation")
@@ -30,31 +31,24 @@ import  android.net.http.SslError;
 public class VisitorXWalkActivity extends Activity{
 
     private static final String TAG = "Comm100 Visitor Client";
-
     private int _siteId = 0;
     private int _planId = 0;
     private String _chatServer = "https://chatserver.comm100.com";
     private  boolean _debug=false;
-
     private XWalkView mXWalkView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
 
         //XWalkPreferences
+
         mXWalkView =new XWalkView(this);
-
-
         setContentView(mXWalkView);
-
-
         Intent intent = getIntent();
         _siteId = intent.getIntExtra("site_id", _siteId);
         _planId = intent.getIntExtra("plan_id", _planId);
-//		_autoSubmitPrechat = intent.getBooleanExtra("auto_submit_prechat", _autoSubmitPrechat);
-//		_autoSubmitPrechatScript = intent.getStringExtra("auto_submit_prechat_script");
         _chatServer = intent.getStringExtra("chat_server");
         //debug  model
         _debug = intent.getBooleanExtra("debug",_debug);
@@ -157,10 +151,15 @@ public class VisitorXWalkActivity extends Activity{
                                        }
                                    }
         );
-     //   XWalkSettings webSettings = mXWalkView.getSettings();
-     //   webSettings.setJavaScriptEnabled(true);
+        XWalkSettings webSettings = mXWalkView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAllowContentAccess(true);
+        webSettings.setAllowFileAccess(true);
+        webSettings.setAllowFileAccessFromFileURLs(false);
+        webSettings.setAllowUniversalAccessFromFileURLs(false);
+        webSettings.setMediaPlaybackRequiresUserGesture(false);
         reloadChatWindow();
-
     }
 
 
@@ -174,11 +173,22 @@ public class VisitorXWalkActivity extends Activity{
         {
             url=_chatServer + "/?siteId=" + _siteId + "&planId=" + _planId;
         }
+
+/*        mXWalkView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mXWalkView.load(url ,null);
+            }
+        }, 500);*/
+
         // load page
         mXWalkView.load(url,null);
 
+        //https://webrtc.github.io/samples/src/content/getusermedia/gum/
+        //resolution
+        // https://www.webrtc-experiment.com/websocket/
+        //https://e6364e4f.ngrok.io/src/content/getusermedia/gum/
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -227,5 +237,24 @@ public class VisitorXWalkActivity extends Activity{
             mXWalkView.onNewIntent(intent);
         }
     }
-
+    @Override
+    public  boolean onKeyUp(int keyCode,KeyEvent event)
+    {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            String mjs="javascript:var aEvent=document.createEvent(\"" + "HTMLEvents" + "\");" +
+                    " aEvent.initEvent(\""+ "beforeunload" +   "\",true,true);" +
+                    " aEvent.eventType=\""+ "message" +   "\"; document.dispatchEvent(aEvent);";
+            mXWalkView.evaluateJavascript(mjs,null);
+            // return true;
+        }
+        return  super.onKeyUp(keyCode,event);
+    }
+    /*    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+           // return false;
+        }
+        return super.dispatchKeyEvent(event);
+    }*/
 }
