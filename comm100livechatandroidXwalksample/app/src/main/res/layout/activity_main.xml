@@ -71,7 +71,7 @@
             android:gravity="left"
             android:minWidth="300px"
             android:textSize="30px"
-            android:text="https://d8facf4a.ngrok.io"
+            android:text="https://b26b35c4.ngrok.io"
             />
     </TableRow>
 
