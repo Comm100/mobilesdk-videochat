@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
-
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.0'
+    }}
 repositories
         {
             mavenLocal()
